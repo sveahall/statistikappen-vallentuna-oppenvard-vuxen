@@ -1,0 +1,50 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config jest.config.ts --runInBand",
+    "dev": "NODE_ENV=development ts-node-dev --respawn src/index.ts",
+    "dev:staging": "NODE_ENV=staging ts-node-dev --respawn src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "build:staging": "NODE_ENV=staging tsc -p tsconfig.json",
+    "build:production": "NODE_ENV=production tsc -p tsconfig.json",
+    "migrate": "bash scripts/migrate.sh",
+    "start": "NODE_ENV=production node dist/index.js",
+    "start:staging": "NODE_ENV=staging node dist/index.js",
+    "start:dev": "NODE_ENV=development node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.3",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.23",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.3.0",
+    "@types/pg": "^8.15.4",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

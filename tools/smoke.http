@@ -1,0 +1,21 @@
+### Health
+GET http://localhost:4000/api/healthz
+Origin: http://localhost:5173
+
+### CORS preflight
+OPTIONS http://localhost:4000/api/handlers
+Origin: http://localhost:5173
+Access-Control-Request-Method: GET
+
+### Handlers utan JWT → 401
+GET http://localhost:4000/api/handlers
+
+### Ogiltig JWT → 401 invalid_token
+GET http://localhost:4000/api/handlers
+Authorization: Bearer bad
+
+### Rate-limit invites/accept (kör manuellt flera gånger) → 429
+POST http://localhost:4000/api/invites/accept
+Content-Type: application/json
+
+{"token":"x","password":"p","name":"n"}

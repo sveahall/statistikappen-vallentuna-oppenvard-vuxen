@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS shifts (
+  id SERIAL PRIMARY KEY,
+  case_id INTEGER NOT NULL REFERENCES cases(id) ON DELETE CASCADE,
+  date DATE NOT NULL,
+  hours NUMERIC NOT NULL CHECK (hours > 0),
+  status TEXT NOT NULL DEFAULT 'Utförd',
+  active BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_shifts_case_id ON shifts (case_id);
+CREATE INDEX IF NOT EXISTS idx_shifts_date ON shifts (date);

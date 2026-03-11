@@ -1,0 +1,313 @@
+/* stylelint-disable at-rule-no-unknown */
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tenant-brand: #17694c;
+  --tenant-brand-hover: #145c41;
+  --tenant-brand-soft: #eaf6f1;
+  --tenant-brand-ring: rgba(23, 105, 76, 0.9);
+}
+
+/* Route fade-in */
+.route-fade {
+  opacity: 0;
+  animation: routeFadeIn 150ms ease-in forwards;
+}
+
+@keyframes routeFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Konsekvent typografi-system */
+@layer components {
+  /* Rubriker */
+  .text-h1 {
+    @apply text-3xl font-semibold text-gray-900;
+  }
+  
+  .text-h2 {
+    @apply text-2xl font-semibold text-gray-900;
+  }
+  
+  .text-h3 {
+    @apply text-xl font-semibold text-gray-900;
+  }
+  
+  .text-h4 {
+    @apply text-lg font-semibold text-gray-900;
+  }
+  
+  /* Brödtext */
+  .text-body-large {
+    @apply text-lg text-gray-700;
+  }
+  
+  .text-body {
+    @apply text-base text-gray-700;
+  }
+  
+  .text-body-small {
+    @apply text-sm text-gray-700;
+  }
+  
+  .text-body-xs {
+    @apply text-sm text-gray-700;
+  }
+  
+  /* Labels */
+  .text-label {
+    @apply text-sm font-medium text-gray-700;
+  }
+  
+  .text-label-small {
+    @apply text-sm font-medium text-gray-700;
+  }
+  
+  /* Caption/Helper text */
+  .text-caption {
+    @apply text-sm text-gray-500;
+  }
+  
+  /* Konsekvent spacing för sektioner */
+  .section-spacing {
+    /* stylelint-disable-next-line at-rule-no-unknown */
+    @apply mb-6;
+  }
+  
+  .section-spacing-small {
+    @apply mb-4;
+  }
+  
+  .section-spacing-large {
+    @apply mb-10;
+  }
+  
+  /* Konsekvent card-styling */
+  .content-card {
+    @apply bg-white rounded-lg shadow-sm p-5;
+  }
+  
+  .content-card-compact {
+    /* stylelint-disable-next-line at-rule-no-unknown */
+    @apply bg-white rounded-lg shadow-sm p-4;
+  }
+  
+  /* Konsekvent container-bredd */
+  .content-container {
+    @apply w-full max-w-full sm:max-w-6xl mx-auto px-3 sm:px-4 lg:px-6;
+  }
+  
+  .content-container-wide {
+    @apply w-full max-w-full sm:max-w-7xl mx-auto px-3 sm:px-4 lg:px-6;
+  }
+  
+  .content-container-narrow {
+    @apply w-full max-w-full sm:max-w-4xl mx-auto px-3 sm:px-4 lg:px-6;
+  }
+
+  .responsive-table {
+    @apply w-full;
+  }
+
+  @media (max-width: 639px) {
+    .responsive-table thead {
+      display: none;
+    }
+
+    .responsive-table tbody {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .responsive-table tbody tr {
+      display: grid;
+      gap: 0.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background-color: #ffffff;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 10px 24px -14px rgba(15, 23, 42, 0.25);
+    }
+
+    .responsive-table tbody tr:hover {
+      box-shadow: 0 16px 32px -18px rgba(15, 23, 42, 0.28);
+    }
+
+    .responsive-table tbody td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 !important;
+      text-align: left !important;
+    }
+
+    .responsive-table tbody td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    .responsive-table tbody td.actions {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .responsive-table tbody td.actions::before {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  /* Statistik-tabell: tre spalter → staplade grupper */
+  @media (max-width: 639px) {
+    .stats-responsive-table tbody tr {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .stats-responsive-table tbody td {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.25rem 0 !important;
+    }
+
+    .stats-responsive-table tbody td::before {
+      margin-bottom: 0.25rem;
+    }
+
+    .stats-responsive-table tbody td[data-label='Insats'],
+    .stats-responsive-table tbody td[data-label='Kön'],
+    .stats-responsive-table tbody td[data-label='Behandlare'],
+    .stats-responsive-table tbody td[data-label='Födelseår'] {
+      grid-column: 1 / -1;
+      padding-top: 0.4rem !important;
+    }
+
+    .stats-responsive-table tbody td.actions {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Mobiloptimering för mindre skärmar */
+  @media (max-width: 480px) {
+    .content-container {
+      @apply px-2;
+    }
+    
+    .content-container-wide {
+      @apply px-2;
+    }
+    
+    .content-container-narrow {
+      @apply px-2;
+    }
+  }
+
+  /* Förbättrad scrollbar för mobil */
+  @media (max-width: 768px) {
+    .overflow-x-auto {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 2px;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 2px;
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+} 

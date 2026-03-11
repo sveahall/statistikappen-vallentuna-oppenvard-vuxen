@@ -1,0 +1,1 @@
+export { StatistikPage } from "./StatistikPage";
