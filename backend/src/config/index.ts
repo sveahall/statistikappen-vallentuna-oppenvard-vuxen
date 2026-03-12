@@ -117,9 +117,21 @@ export const config = {
   // CORS
   cors: {
     // Hantera avsaknad av CORS_ORIGIN säkert (särskilt i test)
-    origin: (process.env.CORS_ORIGIN
-      ? process.env.CORS_ORIGIN.split(',').map(o => o.trim()).filter(Boolean)
-      : []),
+    origin: (() => {
+      const fromEnv = process.env.CORS_ORIGIN
+        ? process.env.CORS_ORIGIN.split(',').map(o => o.trim()).filter(Boolean)
+        : [];
+      // I development: lägg till vanliga Vite-dev-origins så att CORS fungerar oavsett port (5173, 5174, …)
+      if (NODE_ENV === 'development') {
+        const viteOrigins = ['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174'];
+        const combined = [...fromEnv];
+        for (const o of viteOrigins) {
+          if (!combined.includes(o)) combined.push(o);
+        }
+        return combined;
+      }
+      return fromEnv;
+    })(),
     credentials: process.env.CORS_CREDENTIALS === 'true',
   },
 

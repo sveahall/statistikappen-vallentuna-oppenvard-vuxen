@@ -90,7 +90,7 @@ const statistikRouteElement = (
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <AuthProvider>
           <RefreshProvider>
             <OnboardingProvider>

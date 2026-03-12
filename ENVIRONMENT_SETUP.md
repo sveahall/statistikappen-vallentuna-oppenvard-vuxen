@@ -12,8 +12,8 @@ VITE_API_URL=http://localhost:4000/api
 VITE_TENANT_ID=vallentuna-oppenvard-vuxen # alternativt VITE_MUNICIPALITY_CODE
 
 # Kommunens namn och UI-branding
-VITE_MUNICIPALITY_NAME=Vallentuna öppenvård vuxen
-VITE_UI_BRAND_NAME=Vallentuna öppenvård vuxen
+VITE_MUNICIPALITY_NAME=Vallentuna kommun
+VITE_UI_BRAND_NAME=Vallentuna kommun
 
 # Supportkontakt som visas i UI
 VITE_SUPPORT_EMAIL=support@vallentuna.se
@@ -42,8 +42,8 @@ Om du får felmeddelande om saknade miljövariabler:
 ```bash
 VITE_API_URL=http://localhost:4000/api
 VITE_TENANT_ID=vallentuna-oppenvard-vuxen
-VITE_MUNICIPALITY_NAME=Vallentuna öppenvård vuxen
-VITE_UI_BRAND_NAME=Vallentuna öppenvård vuxen (Dev)
+VITE_MUNICIPALITY_NAME=Vallentuna kommun
+VITE_UI_BRAND_NAME=Vallentuna kommun (Dev)
 VITE_SUPPORT_EMAIL=support@vallentuna.se
 ```
 

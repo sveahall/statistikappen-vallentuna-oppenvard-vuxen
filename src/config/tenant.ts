@@ -41,10 +41,10 @@ const fallbackApiBaseUrl = (() => {
 })();
 
 const defaultTenant: TenantConfig = {
-  municipalityName: "Vallentuna öppenvård vuxen",
+  municipalityName: "Vallentuna kommun",
   municipalityCode: "VALLENTUNA_OPPENVARD_VUXEN",
-  uiBrandName: "Vallentuna öppenvård vuxen",
-  uiBrandSubtitle: "Tidsregistrering och Statistik",
+  uiBrandName: "Vallentuna kommun",
+  uiBrandSubtitle: "Öppenvård vuxen statistiksystem",
   supportEmail: "support@vallentuna.se",
   exampleEmail: "exempel@vallentuna.se",
   baseUrl: fallbackBaseUrl,
@@ -53,8 +53,8 @@ const defaultTenant: TenantConfig = {
   locale: "sv-SE",
   dataRetentionDays: 1825,
   assets: {
-    logoPath: "/municipality-logo.svg",
-    logoAlt: "Vallentuna öppenvård vuxen logo",
+    logoPath: "/vallentuna-logo.png",
+    logoAlt: "Vallentuna kommun logo",
   },
   theme: {
     primary: "#17694c",
@@ -74,14 +74,21 @@ const parseNumber = (value: string | undefined, fallback: number): number => {
 };
 
 export const tenant: TenantConfig = (() => {
-  const uiBrandName =
+  let uiBrandName =
     getEnv("VITE_UI_BRAND_NAME") ||
     getEnv("VITE_MUNICIPALITY_NAME") ||
     getEnv("VITE_APP_NAME") ||
     defaultTenant.uiBrandName;
+  // Detta projekt är för Vallentuna öppenvård vuxen – överskriv gammal template-text
+  if (uiBrandName.trim().toLowerCase() === "template municipality") {
+    uiBrandName = defaultTenant.uiBrandName;
+  }
 
-  const municipalityName =
+  let municipalityName =
     getEnv("VITE_MUNICIPALITY_NAME") || uiBrandName || defaultTenant.municipalityName;
+  if (municipalityName.trim().toLowerCase() === "template municipality") {
+    municipalityName = defaultTenant.municipalityName;
+  }
 
   const uiBrandSubtitle =
     getEnv("VITE_UI_BRAND_SUBTITLE") || defaultTenant.uiBrandSubtitle;

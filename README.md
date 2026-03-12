@@ -52,8 +52,8 @@ Skapa en `.env`-fil i projektets rot (se [ENVIRONMENT_SETUP.md](./ENVIRONMENT_SE
 ```bash
 VITE_API_URL=http://localhost:4000/api
 VITE_TENANT_ID=vallentuna-oppenvard-vuxen
-VITE_MUNICIPALITY_NAME=Vallentuna öppenvård vuxen
-VITE_UI_BRAND_NAME=Vallentuna öppenvård vuxen
+VITE_MUNICIPALITY_NAME=Vallentuna kommun
+VITE_UI_BRAND_NAME=Vallentuna kommun
 VITE_SUPPORT_EMAIL=support@vallentuna.se
 ```
 
