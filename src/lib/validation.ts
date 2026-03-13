@@ -45,7 +45,7 @@ export const customerSchema = z.object({
     .min(1, swedishMessages.required)
     .max(10, swedishMessages.maxLength(10))
     .regex(/^[A-ZÅÄÖ\s]+$/i, 'Endast bokstäver och mellanslag tillåtna'),
-  gender: z.enum(['Flicka', 'Pojke', 'Icke-binär'], {
+  gender: z.enum(['Kvinna', 'Man', 'Icke-binär'], {
     message: 'Välj kön'
   }),
   birthYear: z.number()

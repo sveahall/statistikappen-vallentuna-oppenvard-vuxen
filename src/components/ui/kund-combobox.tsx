@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { getCustomers } from "@/lib/api";
 import { useRefresh } from "@/contexts/RefreshContext";
 import type { Customer } from "@/types/types";
+import { displayGender } from "@/lib/utils";
 
 type CustomerOption = {
   id: string;
@@ -28,7 +29,7 @@ export const KundCombobox = ({ value, onChange, placeholder }: KundComboboxProps
         setKunder(
           data.map((k: Customer) => {
             const isGroup = k.is_group || k.isGroup;
-            const genderPart = isGroup ? 'Grupp' : (k.gender ?? '');
+            const genderPart = isGroup ? 'Grupp' : displayGender(k.gender);
             const birthValue = typeof k.birthYear !== 'undefined' ? k.birthYear : k.birth_year;
             const birthPart = isGroup || !birthValue ? '' : `(${birthValue})`;
             const label = [k.initials, genderPart, birthPart].filter(Boolean).join(' ').trim();

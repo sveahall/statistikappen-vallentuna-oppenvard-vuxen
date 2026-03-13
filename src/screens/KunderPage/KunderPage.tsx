@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { createCustomer, getCustomers, softDeleteCustomer, reactivateCustomer, protectCustomer, unprotectCustomer } from "@/lib/api";
 import toast from "react-hot-toast";
+import { displayGender } from "@/lib/utils";
 import { Customer } from "@/types/types";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRefresh } from "@/contexts/RefreshContext";
@@ -118,7 +119,7 @@ export const KunderPage = (): JSX.Element => {
   const handleAddCustomer = () => {
     setNewCustomers(prev => [
       ...prev,
-      { initials: "", gender: "Flicka", birth_year: 0, active: true, startDate: getToday(), is_group: false },
+      { initials: "", gender: "", birth_year: 0, active: true, startDate: getToday(), is_group: false },
     ]);
   };
 
@@ -332,8 +333,8 @@ export const KunderPage = (): JSX.Element => {
                             onChange={e => handleChangeNewCustomer(idx, "gender", e.target.value)}
                           >
                             <option value="">Välj kön</option>
-                            <option value="Flicka">Flicka</option>
-                            <option value="Pojke">Pojke</option>
+                            <option value="Kvinna">Kvinna</option>
+                            <option value="Man">Man</option>
                             <option value="Icke-binär">Icke-binär</option>
                           </select>
                           {errors[idx]?.gender && <span className="text-red-500 text-xs mt-1 block">{errors[idx].gender}</span>}
@@ -403,7 +404,7 @@ export const KunderPage = (): JSX.Element => {
                         )}
                       </div>
                     </td>
-                    <td data-label="Kön" className="px-2 mobile:px-4 py-2 mobile:py-3 text-center text-xs mobile:text-sm whitespace-nowrap">{customer.is_group ? '—' : customer.gender}</td>
+                    <td data-label="Kön" className="px-2 mobile:px-4 py-2 mobile:py-3 text-center text-xs mobile:text-sm whitespace-nowrap">{customer.is_group ? '—' : displayGender(customer.gender)}</td>
                     <td data-label="Födelseår" className="px-2 mobile:px-4 py-2 mobile:py-3 text-center text-xs mobile:text-sm whitespace-nowrap">{customer.is_group ? '—' : (customer.birth_year ?? '—')}</td>
                     <td data-label="Status" className="px-2 mobile:px-4 py-2 mobile:py-3 text-center whitespace-nowrap">
                       <span className={`inline-block px-2 mobile:px-3 py-1 text-xs rounded-full font-semibold ${

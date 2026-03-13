@@ -32,3 +32,16 @@ export const appHealth = () => {
 };
 
 export const cn = (...args: ClassValue[]) => twMerge(clsx(...args));
+
+const genderDisplayMap: Record<string, string> = {
+  pojke: "Man",
+  flicka: "Kvinna",
+  man: "Man",
+  kvinna: "Kvinna",
+  "icke-binär": "Icke-binär",
+};
+
+export const displayGender = (gender: string | null | undefined): string => {
+  if (!gender) return "—";
+  return genderDisplayMap[gender.toLowerCase()] ?? gender;
+};

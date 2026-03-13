@@ -94,8 +94,8 @@ export function validateCustomerData(req: Request, res: Response, next: NextFunc
       return res.status(400).json({ error: 'Initialer, kön och födelseår krävs' });
     }
 
-    if (!['Flicka', 'Pojke', 'Icke-binär'].includes(gender)) {
-      return res.status(400).json({ error: 'Kön måste vara Flicka, Pojke eller Icke-binär' });
+    if (!['Kvinna', 'Man', 'Icke-binär'].includes(gender)) {
+      return res.status(400).json({ error: 'Kön måste vara kvinna, man eller Icke-binär' });
     }
 
     const numericBirthYear = Number(birthYear);

@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRefresh } from "@/contexts/RefreshContext";
 import { CaseWithNames, StatsSummary } from "@/types/types";
+import { displayGender } from "@/lib/utils";
 
 type EffortStatsRow = {
   effort_name: string;
@@ -686,7 +687,7 @@ export const MainContent = (): JSX.Element => {
       const genderSheetData = [
         ['Kön'],
         ['Kön', 'Besök', 'Totala timmar'],
-        ...safeGender.map(row => [row.gender ?? 'Okänd', Number(row.antal_besok ?? 0), Number(row.totala_timmar ?? 0)]),
+        ...safeGender.map(row => [displayGender(String(row.gender ?? '')), Number(row.antal_besok ?? 0), Number(row.totala_timmar ?? 0)]),
       ];
       const genderSheet = XLSX.utils.aoa_to_sheet(genderSheetData);
 
@@ -877,8 +878,8 @@ export const MainContent = (): JSX.Element => {
                     className={`border rounded-lg px-4 py-2 text-base bg-[#fafbfc] focus:outline-none focus:ring-2 ${errors.gender ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-[var(--tenant-brand)]'}`}
                   >
                     <option value="">Välj kön</option>
-                    <option value="Flicka">Flicka</option>
-                    <option value="Pojke">Pojke</option>
+                    <option value="Kvinna">Kvinna</option>
+                    <option value="Man">Man</option>
                     <option value="Icke-binär">Icke-binär</option>
                   </select>
                   {errors.gender && <span className="text-red-500 text-sm mt-1">{errors.gender}</span>}
@@ -1131,8 +1132,8 @@ export const MainContent = (): JSX.Element => {
                 <label className="block text-sm font-medium text-gray-700">Kön</label>
                 <MultiSelectCombobox
                   options={[
-                    { value: "Pojke", label: "Pojke" },
-                    { value: "Flicka", label: "Flicka" },
+                    { value: "Man", label: "Man" },
+                    { value: "Kvinna", label: "Kvinna" },
                     { value: "Icke-binär", label: "Icke-binär" }
                   ]}
                   value={statistik.gender}

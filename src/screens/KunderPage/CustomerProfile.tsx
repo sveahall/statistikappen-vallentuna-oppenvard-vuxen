@@ -14,6 +14,7 @@ import type { CaseWithNames, ShiftEntry, ShiftStatus, Effort, Customer } from "@
 import type { HandlerPublic } from "@/lib/api";
 import { BehandlareCombobox } from "@/components/ui/behandlare-combobox";
 import toast from "react-hot-toast";
+import { displayGender } from "@/lib/utils";
 
 type EditableCustomer = {
   initials: string;
@@ -160,9 +161,9 @@ export const CustomerProfile = (): JSX.Element => {
   const displayInitials = customer.active ? customer.initials : '—';
   const baseTitle = isGroup
     ? `${displayInitials} – Grupp`
-    : `${displayInitials} - ${customer.gender ?? '—'} (${customer.birthYear ?? '—'})`;
+    : `${displayInitials} - ${displayGender(customer.gender)} (${customer.birthYear ?? '—'})`;
   const piiTitle = pii
-    ? (isGroup ? `${pii.initials} – Grupp` : `${pii.initials} - ${pii.gender ?? customer.gender ?? '—'} (${customer.birthYear ?? '—'})`)
+    ? (isGroup ? `${pii.initials} – Grupp` : `${pii.initials} - ${displayGender(pii.gender ?? customer.gender)} (${customer.birthYear ?? '—'})`)
     : null;
   const customerTitle = baseTitle;
   const effectiveTitle = piiTitle ?? customerTitle;
@@ -171,7 +172,7 @@ export const CustomerProfile = (): JSX.Element => {
     setEditCustomer({
       initials: customer.initials || "",
       birthYear: customer.birthYear ? String(customer.birthYear) : "",
-      gender: isGroup ? '' : (customer.gender || "Flicka"),
+      gender: isGroup ? '' : (customer.gender || "kvinna"),
       startDate: customer.created_at ? customer.created_at.slice(0, 10) : "",
       active: typeof customer.active === "boolean" ? customer.active : true,
       isGroup,
@@ -516,7 +517,7 @@ export const CustomerProfile = (): JSX.Element => {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Kön</span>
-                <span className="font-medium text-gray-800">{isGroup ? '—' : (customer.gender ?? '—')}</span>
+                <span className="font-medium text-gray-800">{isGroup ? '—' : displayGender(customer.gender)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Startdatum</span>
@@ -767,8 +768,8 @@ export const CustomerProfile = (): JSX.Element => {
                     value={editCustomer.gender}
                     onChange={e => handleEditCustomerChange('gender', e.target.value)}
                   >
-                    <option value="Flicka">Flicka</option>
-                    <option value="Pojke">Pojke</option>
+                    <option value="Kvinna">Kvinna</option>
+                    <option value="Man">Man</option>
                     <option value="Icke-binär">Icke-binär</option>
                   </select>
                   {editCustomerErrors.gender && <span className="text-red-500 text-xs mt-1">{editCustomerErrors.gender}</span>}

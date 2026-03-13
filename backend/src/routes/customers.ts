@@ -238,7 +238,7 @@ export default function customers(pool: Pool) {
       if (!genderValue || birthYearValue == null || Number.isNaN(birthYearValue)) {
         return res.status(400).json({ error: "Kön och födelseår krävs" });
       }
-      if (!['Flicka', 'Pojke', 'Icke-binär'].includes(genderValue)) {
+      if (!['Kvinna', 'Man', 'Icke-binär'].includes(genderValue)) {
         return res.status(400).json({ error: "Ogiltigt kön" });
       }
       const currentYear = new Date().getFullYear();

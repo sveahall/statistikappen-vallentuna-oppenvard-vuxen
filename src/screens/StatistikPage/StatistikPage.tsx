@@ -24,6 +24,7 @@ import { api } from "@/lib/apiClient";
 import toast from "react-hot-toast";
 import { Loader2, ChevronDown } from "lucide-react";
 import { useRefresh } from "@/contexts/RefreshContext";
+import { displayGender } from "@/lib/utils";
 
 const minBarHeight = 24;
 const barChartHeight = 200;
@@ -221,7 +222,7 @@ export const StatistikPage = (): JSX.Element => {
           showChart: true,
           xAxisLabel: 'Kön',
           data: (genderData || []).map((d: StatsSeriesRow) => ({
-            label: d.gender ?? 'Okänd',
+            label: displayGender(d.gender),
             primaryValue: Number(d.antal_besok) || 0,
             secondaryValue: Number(d.totala_timmar) || 0,
             meta: formatMeta({ totalHours: Number(d.totala_timmar) || 0 }),
@@ -310,7 +311,7 @@ export const StatistikPage = (): JSX.Element => {
     } else if (viewMode === 'gender') {
       rows = genderData || [];
       columns = [
-        { header: 'Kön', render: row => row.gender || 'Okänd' },
+        { header: 'Kön', render: row => displayGender(row.gender) },
         { header: 'Besök', render: row => Number(row.antal_besok || 0).toLocaleString('sv-SE'), align: 'right' },
         { header: 'Totala timmar', render: row => formatHours(Number(row.totala_timmar || 0)), align: 'right' },
       ];
@@ -425,8 +426,8 @@ export const StatistikPage = (): JSX.Element => {
           <label className="font-normal text-xs text-gray-500">Kön</label>
           <MultiSelectCombobox
             options={[
-              { label: "Flicka", value: "Flicka" },
-              { label: "Pojke", value: "Pojke" },
+              { label: "Kvinna", value: "Kvinna" },
+              { label: "Man", value: "Man" },
               { label: "Icke-binär", value: "Icke-binär" },
             ]}
             value={selectedGenders}
@@ -887,7 +888,7 @@ export const StatistikPage = (): JSX.Element => {
         ["Kön"],
         ["Kön", "Besök", "Totala timmar"],
         ...safeGenderExport.map((row) => [
-          row.gender || 'Okänd',
+          displayGender(row.gender),
           Number(row.antal_besok || 0),
           Number(row.totala_timmar || 0),
         ])
